@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "firstName": "张",
-      "lastName": "明",
+      "firstName": "Zhang",
+      "lastName": "Ming",
       "email": "zhangming@example.com",
       "dateOfBirth": "1990-05-15",
       "address": {
-        "street": "人民路123号",
-        "city": "北京",
-        "state": "北京",
+        "street": "People road 123",
+        "city": "Beijing",
+        "state": "Beijing",
         "zipCode": "100000"
       },
       "preferences": {
@@ -19,14 +19,14 @@
       }
     },
     {
-      "firstName": "李",
-      "lastName": "华",
-      "email": "lihua@example.com",
+      "firstName": "Wang",
+      "lastName": "Yan",
+      "email": "wangyan@example.com",
       "dateOfBirth": "1985-11-23",
       "address": {
-        "street": "中山路456号",
-        "city": "上海",
-        "state": "上海",
+        "street": "Zhongshan road 456",
+        "city": "Shang hai",
+        "state": "Shang hai",
         "zipCode": "200000"
       },
       "preferences": {
@@ -37,14 +37,14 @@
       }
     },
     {
-      "firstName": "王",
-      "lastName": "芳",
-      "email": "wangfang@example.com",
+      "firstName": "Zhao",
+      "lastName": "Yang",
+      "email": "Zhaoyang@example.com",
       "dateOfBirth": "1992-08-07",
       "address": {
-        "street": "解放路789号",
-        "city": "广州",
-        "state": "广东",
+        "street": "flower road 789",
+        "city": "Guang dong",
+        "state": "Guang dong",
         "zipCode": "510000"
       },
       "preferences": {
@@ -55,4 +55,5 @@
       }
     }
   ]
+
 }
