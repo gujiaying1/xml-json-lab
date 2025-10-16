@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "firstName": "张",
+      "lastName": "明",
+      "email": "zhangming@example.com",
+      "dateOfBirth": "1990-05-15",
+      "address": {
+        "street": "人民路123号",
+        "city": "北京",
+        "state": "北京",
+        "zipCode": "100000"
+      },
+      "preferences": {
+        "theme": "dark",
+        "language": "zh-CN",
+        "notifications": true,
+        "subscription": true
+      }
+    },
+    {
+      "firstName": "李",
+      "lastName": "华",
+      "email": "lihua@example.com",
+      "dateOfBirth": "1985-11-23",
+      "address": {
+        "street": "中山路456号",
+        "city": "上海",
+        "state": "上海",
+        "zipCode": "200000"
+      },
+      "preferences": {
+        "theme": "light",
+        "language": "en-US",
+        "notifications": false,
+        "subscription": false
+      }
+    },
+    {
+      "firstName": "王",
+      "lastName": "芳",
+      "email": "wangfang@example.com",
+      "dateOfBirth": "1992-08-07",
+      "address": {
+        "street": "解放路789号",
+        "city": "广州",
+        "state": "广东",
+        "zipCode": "510000"
+      },
+      "preferences": {
+        "theme": "auto",
+        "language": "zh-CN",
+        "notifications": true,
+        "subscription": true
+      }
+    }
+  ]
+}

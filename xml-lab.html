@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML图书目录</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .book {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        .book h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .book p {
+            margin: 8px 0;
+        }
+        .book-id {
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+        .price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>图书目录</h1>
+<div id="bookList"></div>
+
+<script>
+    // 获取XML数据
+    fetch('book.xml')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('网络响应不正常: ' + response.status);
+            }
+            return response.text();
+        })
+        .then(xmlText => {
+            // 解析XML
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+
+            // 获取所有book元素
+            const books = xmlDoc.getElementsByTagName('book');
+            const bookList = document.getElementById('bookList');
+
+            // 遍历并显示每本书
+            for (let i = 0; i < books.length; i++) {
+                const book = books[i];
+                const id = book.getAttribute('id');
+                const title = book.getElementsByTagName('title')[0].textContent;
+                const author = book.getElementsByTagName('author')[0].textContent;
+                const price = book.getElementsByTagName('price')[0].textContent;
+
+                // 创建HTML元素
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'book';
+                bookDiv.innerHTML = `
+                    <h2>${title}</h2>
+                    <p><span class="book-id">ID: ${id}</span></p>
+                    <p><strong>作者:</strong> ${author}</p>
+                    <p><strong>价格:</strong> <span class="price">¥${price}</span></p>
+                `;
+
+                bookList.appendChild(bookDiv);
+            }
+        })
+        .catch(err => {
+            console.error('获取XML数据时出错:', err);
+            document.getElementById('bookList').innerHTML =
+                '<p>加载图书数据时出错，请检查控制台获取详细信息。</p>';
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON用户档案</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .user-profile {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #9b59b6;
+        }
+        .user-name {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .info-section {
+            margin-bottom: 15px;
+        }
+        .info-section h3 {
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+        .info-item {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .info-label {
+            font-weight: bold;
+            min-width: 120px;
+            color: #7f8c8d;
+        }
+        .subscription-yes {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .subscription-no {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>用户档案</h1>
+<div id="userProfiles"></div>
+
+<script>
+    // 获取JSON数据
+    fetch('userProfiles.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('获取错误: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(json => {
+            // 处理解析后的JSON数据
+            const users = json.users;
+            const userProfilesContainer = document.getElementById('userProfiles');
+
+            // 遍历并显示每个用户档案
+            users.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user-profile';
+
+                // 格式化日期
+                const dob = new Date(user.dateOfBirth);
+                const formattedDob = dob.toLocaleDateString('zh-CN');
+
+                // 创建用户档案HTML
+                userDiv.innerHTML = `
+                    <h2 class="user-name">${user.lastName}${user.firstName}</h2>
+
+                    <div class="info-section">
+                        <h3>基本信息</h3>
+                        <div class="info-item">
+                            <span class="info-label">邮箱:</span>
+                            <span>${user.email}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">出生日期:</span>
+                            <span>${formattedDob}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>地址信息</h3>
+                        <div class="info-item">
+                            <span class="info-label">街道:</span>
+                            <span>${user.address.street}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">城市:</span>
+                            <span>${user.address.city}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">省份:</span>
+                            <span>${user.address.state}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">邮编:</span>
+                            <span>${user.address.zipCode}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>偏好设置</h3>
+                        <div class="info-item">
+                            <span class="info-label">主题:</span>
+                            <span>${user.preferences.theme}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">语言:</span>
+                            <span>${user.preferences.language}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">通知:</span>
+                            <span>${user.preferences.notifications ? '开启' : '关闭'}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">订阅:</span>
+                            <span class="${user.preferences.subscription ? 'subscription-yes' : 'subscription-no'}">
+                                ${user.preferences.subscription ? '已订阅' : '未订阅'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                userProfilesContainer.appendChild(userDiv);
+            });
+        })
+        .catch(err => {
+            console.error('获取JSON数据时出错:', err);
+            document.getElementById('userProfiles').innerHTML =
+                '<p>加载用户数据时出错，请检查控制台获取详细信息。</p>';
+        });
+</script>
+</body>
+</html>
