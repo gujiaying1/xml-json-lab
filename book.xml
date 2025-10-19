@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog>
     <book id="1">
-        <title>JavaScript高级程序设计</title>
+        <title>JavaScript advanced programing</title>
         <author>Nicholas C. Zakas</author>
         <price>89.00</price>
     </book>
     <book id="2">
-        <title>深入理解计算机系统</title>
+        <title>thorough understand computer system</title>
         <author>Randal E. Bryant</author>
         <price>139.00</price>
     </book>
     <book id="3">
-        <title>设计模式</title>
+        <title>design mode</title>
         <author>Erich Gamma</author>
         <price>79.00</price>
     </book>
+
 </catalog>
