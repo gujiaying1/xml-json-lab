@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON用户档案</title>
+    <title>JSON user profiles</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -58,7 +58,7 @@
     </style>
 </head>
 <body>
-<h1>用户档案</h1>
+<h1>user profiles</h1>
 <div id="userProfiles"></div>
 
 <script>
@@ -71,73 +71,72 @@
             return response.json();
         })
         .then(json => {
-            // 处理解析后的JSON数据
+            
             const users = json.users;
             const userProfilesContainer = document.getElementById('userProfiles');
 
-            // 遍历并显示每个用户档案
+            
             users.forEach(user => {
                 const userDiv = document.createElement('div');
                 userDiv.className = 'user-profile';
 
-                // 格式化日期
                 const dob = new Date(user.dateOfBirth);
                 const formattedDob = dob.toLocaleDateString('zh-CN');
 
-                // 创建用户档案HTML
+    
                 userDiv.innerHTML = `
                     <h2 class="user-name">${user.lastName}${user.firstName}</h2>
 
                     <div class="info-section">
-                        <h3>基本信息</h3>
+                        <h3>essential information</h3>
                         <div class="info-item">
-                            <span class="info-label">邮箱:</span>
+                            <span class="info-label">e-mail:</span>
                             <span>${user.email}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">出生日期:</span>
+                            <span class="info-label">birthday:</span>
                             <span>${formattedDob}</span>
                         </div>
                     </div>
 
                     <div class="info-section">
-                        <h3>地址信息</h3>
+                        <h3>address</h3>
                         <div class="info-item">
-                            <span class="info-label">街道:</span>
+                            <span class="info-label">street:</span>
                             <span>${user.address.street}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">城市:</span>
+                            <span class="info-label">city:</span>
                             <span>${user.address.city}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">省份:</span>
+                            <span class="info-label">province:</span>
                             <span>${user.address.state}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">邮编:</span>
+                            <span class="info-label">postcode:</span>
                             <span>${user.address.zipCode}</span>
                         </div>
                     </div>
 
                     <div class="info-section">
-                        <h3>偏好设置</h3>
+                        <h3>preferences</h3>
                         <div class="info-item">
-                            <span class="info-label">主题:</span>
+                            <span class="info-label">theme:</span>
                             <span>${user.preferences.theme}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">语言:</span>
+                            <span class="info-label">language:</span>
                             <span>${user.preferences.language}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">通知:</span>
-                            <span>${user.preferences.notifications ? '开启' : '关闭'}</span>
+                            <span class="info-label">inform:</span>
+                            <span>${user.preferences.notifications ? 'open' : 'close'}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">订阅:</span>
+                            <span class="info-label">subscription:</span>
                             <span class="${user.preferences.subscription ? 'subscription-yes' : 'subscription-no'}">
-                                ${user.preferences.subscription ? '已订阅' : '未订阅'}
+                                ${user.preferences.subscription ? 'subscribed' : 'unsubscribed'}
                             </span>
                         </div>
                     </div>
@@ -147,10 +146,11 @@
             });
         })
         .catch(err => {
-            console.error('获取JSON数据时出错:', err);
+            console.error('An error occurred when obtaining JSON data.:', err);
             document.getElementById('userProfiles').innerHTML =
-                '<p>加载用户数据时出错，请检查控制台获取详细信息。</p>';
+                '<p>An error occurred while loading user data. Please check the console for detailed information.</p>';
         });
 </script>
 </body>
+
 </html>
