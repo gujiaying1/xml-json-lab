@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XML图书目录</title>
+    <title>XML book catalogue</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,7 +43,7 @@
     </style>
 </head>
 <body>
-<h1>图书目录</h1>
+<h1>book catalogue</h1>
 <div id="bookList"></div>
 
 <script>
@@ -51,20 +51,20 @@
     fetch('book.xml')
         .then(response => {
             if (!response.ok) {
-                throw new Error('网络响应不正常: ' + response.status);
+                throw new Error('error: ' + response.status);
             }
             return response.text();
         })
         .then(xmlText => {
-            // 解析XML
+            
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
 
-            // 获取所有book元素
+           
             const books = xmlDoc.getElementsByTagName('book');
             const bookList = document.getElementById('bookList');
 
-            // 遍历并显示每本书
+          
             for (let i = 0; i < books.length; i++) {
                 const book = books[i];
                 const id = book.getAttribute('id');
@@ -72,7 +72,7 @@
                 const author = book.getElementsByTagName('author')[0].textContent;
                 const price = book.getElementsByTagName('price')[0].textContent;
 
-                // 创建HTML元素
+                
                 const bookDiv = document.createElement('div');
                 bookDiv.className = 'book';
                 bookDiv.innerHTML = `
@@ -86,10 +86,11 @@
             }
         })
         .catch(err => {
-            console.error('获取XML数据时出错:', err);
+            console.error('error:', err);
             document.getElementById('bookList').innerHTML =
-                '<p>加载图书数据时出错，请检查控制台获取详细信息。</p>';
+                '<p>An error occurred while loading the book data. Please check the console for detailed information.</p>';
         });
 </script>
 </body>
+
 </html>
